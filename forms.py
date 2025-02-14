@@ -1,15 +1,12 @@
 from datetime import date
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField , SelectField, SelectMultipleField, DateField, SubmitField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.fields import StringField, IntegerField , SelectField, SelectMultipleField, DateField, SubmitField
+from wtforms.validators import DataRequired, NumberRange, InputRequired, Optional
 
 
 # Form to collect data about policy:
 class PolicyInfoForm(FlaskForm):
-    #TODO
-    policy_type = SelectField()
-    #TODO
     policy_number = IntegerField('Enter the number of policy:',
                                  validators=[DataRequired(),NumberRange(min=0)])
     deductible = SelectField('Select type deduction per claim',
@@ -22,18 +19,17 @@ class PolicyInfoForm(FlaskForm):
     agent_type = SelectField('Select type od agent:',
                             choices=[("", "---"), ('External', 'external'), ('Internal', 'internal')],
                             validators=[DataRequired()])
-    #TODO: zakodować funkcja:
     number_of_supplements = IntegerField('Enter the number of supplements:',
                                          validators=[DataRequired(),NumberRange(min=0)])
-    # TODO: zakodować:
-    # age_of_policy_holder =
-    submit = SubmitField('Request')
+    age_of_policy_holder = IntegerField('Enter the name of policy holder:',
+                                             validators=[DataRequired(),NumberRange(min=0)])
+    submit = SubmitField('Next >>')
 
 
 # Form to collect data about claim:
 class ClaimInfoForm(FlaskForm):
     collision_date = DateField('Select a day of collision:',
-                               format='%d-%m-%Y', default=date.today,
+                               default=date.today,
                                validators=[DataRequired()])
     accident_area = SelectField('Select area of accident:',
                                 choices=[("", "---"), ('Urban', 'urban'), ('Rural', 'rural')],
@@ -47,16 +43,16 @@ class ClaimInfoForm(FlaskForm):
     witness_present = SelectField('Is a witness present? :',
                                   choices=[("", "---"), ('No', 'no'), ('Yes', 'yes')],
                                   validators=[DataRequired()])
-    #TODO: zakodować funkcja:
-    address_change_claim = IntegerField('Enter the number of supplements:',
+    address_change_claim = IntegerField('Enter the number of adress change claim:', #TODO: co to jest address_change_claim
                                          validators=[DataRequired(),NumberRange(min=0)])
+    submit = SubmitField('Request')
     #TODO: do policzenia?
     # days_policy_accident =
     #TODO: do policzenia?
     # days_policy_claim =
     #TODO: może usunąć od razu?
     # year =
-    submit = SubmitField('Request')
+
 
 
 # Form to collect data about driver:
@@ -79,7 +75,7 @@ class DriverInfoForm(FlaskForm):
     #TODO: zakodować funkcja:
     number_of_cars = IntegerField('Enter the number of cars:',
                                   validators=[DataRequired(),NumberRange(min=0)])
-    submit = SubmitField('Request')
+    submit = SubmitField('Next >>')
 
 
 class VehicleInfoForm(FlaskForm):
@@ -91,12 +87,12 @@ class VehicleInfoForm(FlaskForm):
                                 ('Saturn', 'Saturn'), ('Porsche', 'Porsche'), ('BMW', 'BMW'), ('Mercedes', 'Mercedes'),
                                 ('Ferrari', 'Ferrari'), ('Lexus', 'Lexus')],
                        validators=[DataRequired()])
+    year_of_production = IntegerField('Enter year od production:',
+                                 validators=[DataRequired(),NumberRange(min=0)]) # TODO use to calculate age_of_vehicle
     vehicle_category = SelectField('Select type of fault',
                                    choices=[("", "---"), ('Sport', 'sport'),
                                             ('Utility', 'utility'), ('Sedan', 'sedan')],
                                    validators=[DataRequired()])
     vehicle_price = IntegerField('Enter vehicle price:',
                                  validators=[DataRequired(),NumberRange(min=0)])
-    #TODO:
-    # age_of_vehicle =
-    submit = SubmitField('Request')
+    submit = SubmitField('Next >>')
