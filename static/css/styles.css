@@ -2319,11 +2319,27 @@ textarea.form-control-lg {
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 }
+
 .btn-check[disabled] + .btn, .btn-check:disabled + .btn {
   pointer-events: none;
   filter: none;
   opacity: 0.65;
 }
+
+.btn-next {
+    background-color: #2E2E2E !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-next:hover {
+    background-color: #444444 !important;
+    color: white;
 
 .form-range {
   width: 100%;
@@ -10841,8 +10857,9 @@ textarea.form-control-lg {
 .list-inline-item:not(:last-child) {
   margin-right: 0.5rem;
 }
-.fa-stack .fa-circle {
-    color: rgba(255, 255, 255, 0.5);
+
+.fa-stack .fa-circle .fa-stack-2x{
+    background-color: #444444 !important;
 }
 
 

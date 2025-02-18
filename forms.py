@@ -72,10 +72,9 @@ class DriverInfoForm(FlaskForm):
                              validators=[DataRequired()])
     past_number_of_claim = IntegerField('Enter the number of past claims:',
                                          validators=[DataRequired(),NumberRange(min=0)])
-    #TODO: zakodować funkcja:
     number_of_cars = IntegerField('Enter the number of cars:',
                                   validators=[DataRequired(),NumberRange(min=0)])
-    submit = SubmitField('Next >>')
+    submit = SubmitField('Next >>', render_kw={"class": "btn-next"})
 
 
 class VehicleInfoForm(FlaskForm):
@@ -88,7 +87,7 @@ class VehicleInfoForm(FlaskForm):
                                 ('Ferrari', 'Ferrari'), ('Lexus', 'Lexus')],
                        validators=[DataRequired()])
     year_of_production = IntegerField('Enter year od production:',
-                                 validators=[DataRequired(),NumberRange(min=0)]) # TODO use to calculate age_of_vehicle
+                                 validators=[DataRequired(),NumberRange(min=0)])
     vehicle_category = SelectField('Select type of fault',
                                    choices=[("", "---"), ('Sport', 'sport'),
                                             ('Utility', 'utility'), ('Sedan', 'sedan')],

@@ -1,36 +1,22 @@
 {% from 'bootstrap5/form.html' import render_form %}
 {% include "header.html" %}
 
-
-<!-- Local Header -->
-<header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h2>Fill the form to check if your case is a fraud!</h2>
-
-                {{ render_form(form) }}
-
-                # TODO
-<!--                {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}-->
-<!--                <form method="POST">-->
-<!--                    {{ form.hidden_tag() }}-->
-<!--                </form>-->
-            </div>
-        </div>
+<!-- Image element - set the background image for the header in the line below-->
+<div class="py-5 bg-image-full" style="background-image: url('https://images.unsplash.com/photo-1713623311317-d3c43a4be4cf?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 300px;">
+    <!-- Spacer to ensure the image appears correctly -->
+    <div class="d-flex justify-content-center align-items-center" style="height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+        <h1 class="text-white">Fill the forms to check if your case is a fraud!</h1>
     </div>
-</header>
+</div>
 <!-- Content section-->
 <section class="py-5">
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <h2>Full Width Backgrounds</h2>
-                <p class="lead">A single, lightweight helper class allows you to add engaging, full width background
-                    images to sections of your page.</p>
-                <p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here
-                    on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the
-                    universe.</p>
+                <h2>{{ title }}</h2>
+                {{ render_form(form) }}
+
+
             </div>
         </div>
     </div>
@@ -40,20 +26,6 @@
     <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
     <div style="height: 20rem"></div>
 </div>
-<!-- Content section-->
-<section class="py-5">
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h2>Engaging Background Images</h2>
-                <p class="lead">The background images used in this template are sourced from Unsplash and are open
-                    source and free to use.</p>
-                <p class="mb-0">I can't tell you how many people say they were turned off from science because of a
-                    science teacher that completely sucked out all the inspiration and enthusiasm they had for the
-                    course.</p>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 {% include "footer.html" %}
