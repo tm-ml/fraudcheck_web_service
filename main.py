@@ -86,6 +86,7 @@ def add_policy():
     if form.validate_on_submit():
         new_policy = PolicyDataTable(
             policy_number=form.policy_number.data,
+            policy_start_date=form.policy_start_date.data,
             deductible=form.deductible.data,
             base_policy=form.base_policy.data,
             agent_type=form.agent_type.data,
@@ -114,12 +115,13 @@ def add_claim():
             vehicle_id=int(vehicle_id),
             policy_id=int(policy_id),
             collision_date=form.collision_date.data,
-            claim_report_date=datetime.now(),
+            claim_report_datetime=datetime.now(),
             accident_area=form.accident_area.data,
             fault=form.fault.data,
             police_report=form.police_report_field.data,
             witness_present=form.witness_present.data,
-            address_change_claim=form.address_change_claim.data
+            address_change_claim=form.address_change_claim.data,
+            rep_number=form.rep_number.data
         )
         db.session.add(new_claim)
         db.session.commit()
@@ -133,13 +135,13 @@ def add_claim():
         #make new record in RequestTable:
         new_request = RequestTable(
             Month = new_claim.collision_date.month,
-            WeekOfMonth = 1,
+            WeekOfMonth = utils.week_of_months(new_claim.collision_date),
             DayOfWeek = new_claim.collision_date.strftime('%A'),
             Make = new_vehicle.make,
             AccidentArea = new_claim.accident_area,
-            DayOfWeekClaimed = new_claim.claim_report_date.strftime('%A'),
-            MonthClaimed = new_claim.claim_report_date.month,
-            WeekOfMonthClaimed =  2,
+            DayOfWeekClaimed = new_claim.claim_report_datetime.strftime('%A'),
+            MonthClaimed = new_claim.claim_report_datetime.month,
+            WeekOfMonthClaimed =  utils.week_of_months(new_claim.claim_report_datetime.date()),
             Sex = new_driver.sex,
             MaritalStatus = new_driver.marital_status,
             Age = new_driver.age,
@@ -148,11 +150,13 @@ def add_claim():
             VehicleCategory = new_vehicle.vehicle_category,
             VehiclePrice = new_vehicle.vehicle_price,
             PolicyNumber = new_policy.policy_number,
-            RepNumber = 'tmp',
+            RepNumber = new_claim.rep_number,
             Deductible = new_policy.deductible,
             DriverRating = new_driver.driver_rating,
-            Days_Policy_Accident = 'tmp',
-            Days_Policy_Claim = 'tmp',
+            Days_Policy_Accident = utils.date_difference(date_1=new_claim.collision_date,
+                                                         date_2=new_policy.policy_start_date),
+            Days_Policy_Claim = utils.date_difference(date_1=new_claim.claim_report_datetime.date(),
+                                                      date_2=new_policy.policy_start_date),
             PastNumberOfClaims = new_driver.past_number_of_claim,
             AgeOfVehicle = datetime.now().year - new_vehicle.year_of_production,
             AgeOfPolicyHolder = new_policy.age_of_policy_holder,

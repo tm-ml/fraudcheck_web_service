@@ -22,12 +22,13 @@ class ClaimDataTable(db.Model):
     request_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("request_table.id"), nullable=True)
     # Other columns
     collision_date: Mapped[date] = mapped_column(Date, nullable=False)
-    claim_report_date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+    claim_report_datetime: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     accident_area: Mapped[str] = mapped_column(String(250), nullable=False)
     fault: Mapped[str] = mapped_column(String(250), nullable=False)
     police_report: Mapped[str] = mapped_column(String(250), nullable=False)
     witness_present: Mapped[str] = mapped_column(String(250), nullable=False)
     address_change_claim: Mapped[str] = mapped_column(String(250), nullable=False)
+    rep_number: Mapped[int] = mapped_column(Integer, nullable=False)
     # Add relations:
     driver: Mapped["DriverDataTable"] = relationship("DriverDataTable", back_populates="claims")
     vehicle: Mapped["VehicleDataTable"] = relationship("VehicleDataTable", back_populates="claims")
@@ -52,7 +53,7 @@ class VehicleDataTable(db.Model):
     make: Mapped[str] = mapped_column(String(250), nullable=False)
     year_of_production: Mapped[int] = mapped_column(Integer, nullable=False)
     vehicle_category: Mapped[str] = mapped_column(String(250), nullable=False)
-    vehicle_price: Mapped[int] = mapped_column(Integer, nullable=False)
+    vehicle_price: Mapped[str] = mapped_column(String(250), nullable=False)
     # Add relation:
     claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="vehicle")
 
@@ -60,6 +61,7 @@ class PolicyDataTable(db.Model):
     __tablename__ = "policy_table"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     policy_number: Mapped[str] = mapped_column(String(250), nullable=False)
+    policy_start_date: Mapped[date] = mapped_column(Date, nullable=False)
     deductible: Mapped[str] = mapped_column(String(250), nullable=False)
     base_policy: Mapped[str] = mapped_column(String(250), nullable=False)
     agent_type: Mapped[str] = mapped_column(String(250), nullable=False)

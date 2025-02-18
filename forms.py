@@ -1,14 +1,17 @@
 from datetime import date
 
 from flask_wtf import FlaskForm
-from wtforms.fields import StringField, IntegerField , SelectField, SelectMultipleField, DateField, SubmitField
-from wtforms.validators import DataRequired, NumberRange, InputRequired, Optional
+from wtforms.fields import IntegerField , SelectField, DateField, SubmitField
+from wtforms.validators import DataRequired, NumberRange
 
 
 # Form to collect data about policy:
 class PolicyInfoForm(FlaskForm):
     policy_number = IntegerField('Enter the number of policy:',
-                                 validators=[DataRequired(),NumberRange(min=0)])
+                                 validators=[DataRequired(),NumberRange(min=0, max=15420)])
+    policy_start_date = DateField('Select a policy start date:',
+                               default=date.today,
+                               validators=[DataRequired()])
     deductible = SelectField('Select type deduction per claim',
                              choices=[("", "---"), ('300', '300'), ('400', '400'), ('500', '500'), ('700', '700')],
                              validators=[DataRequired()])
@@ -33,7 +36,7 @@ class ClaimInfoForm(FlaskForm):
                                validators=[DataRequired()])
     accident_area = SelectField('Select area of accident:',
                                 choices=[("", "---"), ('Urban', 'urban'), ('Rural', 'rural')],
-                                validators=[DataRequired(message="Please select area of accident.")])
+                                validators=[DataRequired()])
     fault = SelectField('Select type of fault:',
                         choices=[("", "---"), ('Policy Holder', 'policy holder'), ('Third Party', 'third party')],
                         validators=[DataRequired()])
@@ -43,16 +46,11 @@ class ClaimInfoForm(FlaskForm):
     witness_present = SelectField('Is a witness present? :',
                                   choices=[("", "---"), ('No', 'no'), ('Yes', 'yes')],
                                   validators=[DataRequired()])
-    address_change_claim = IntegerField('Enter the number of adress change claim:', #TODO: co to jest address_change_claim
+    address_change_claim = IntegerField('Enter the number of adress change claim:',
                                          validators=[DataRequired(),NumberRange(min=0)])
+    rep_number = IntegerField('Select the individual number of insurance representative handling the claim (1-16):',
+                                 validators=[DataRequired(), NumberRange(min=1, max=16)])
     submit = SubmitField('Request')
-    #TODO: do policzenia?
-    # days_policy_accident =
-    #TODO: do policzenia?
-    # days_policy_claim =
-    #TODO: może usunąć od razu?
-    # year =
-
 
 
 # Form to collect data about driver:
@@ -92,6 +90,10 @@ class VehicleInfoForm(FlaskForm):
                                    choices=[("", "---"), ('Sport', 'sport'),
                                             ('Utility', 'utility'), ('Sedan', 'sedan')],
                                    validators=[DataRequired()])
-    vehicle_price = IntegerField('Enter vehicle price:',
-                                 validators=[DataRequired(),NumberRange(min=0)])
+    vehicle_price = SelectField('Select the estimated range of vehicle price:',
+                       choices=[("", "---"), ('less than 20000', 'less than 20000'),
+                                ('20000 to 29000', '20000 to 29000'), ('30000 to 39000', '30000 to 39000'),
+                                ('40000 to 59000', '40000 to 59000'), ('60000 to 69000', '60000 to 69000'),
+                                ('more than 69000', 'more than 69000')],
+                       validators=[DataRequired()])
     submit = SubmitField('Next >>')
