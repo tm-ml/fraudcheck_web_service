@@ -42,8 +42,8 @@ class DriverDataTable(db.Model):
     marital_status: Mapped[str] = mapped_column(String(250), nullable=False)
     age: Mapped[int] = mapped_column(Integer, nullable=False)
     driver_rating: Mapped[int] = mapped_column(Integer, nullable=False)
-    past_number_of_claim: Mapped[int] = mapped_column(Integer, nullable=False)
-    number_of_cars: Mapped[int] = mapped_column(Integer, nullable=False)
+    past_number_of_claim: Mapped[str] = mapped_column(String(250), nullable=False)
+    number_of_cars: Mapped[str] = mapped_column(String(250), nullable=False)
     # Add relation:
     claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="driver")
 
@@ -51,7 +51,7 @@ class VehicleDataTable(db.Model):
     __tablename__ = "vehicle_table"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     make: Mapped[str] = mapped_column(String(250), nullable=False)
-    year_of_production: Mapped[int] = mapped_column(Integer, nullable=False)
+    age: Mapped[str] = mapped_column(String(250), nullable=False)
     vehicle_category: Mapped[str] = mapped_column(String(250), nullable=False)
     vehicle_price: Mapped[str] = mapped_column(String(250), nullable=False)
     # Add relation:
@@ -65,8 +65,8 @@ class PolicyDataTable(db.Model):
     deductible: Mapped[str] = mapped_column(String(250), nullable=False)
     base_policy: Mapped[str] = mapped_column(String(250), nullable=False)
     agent_type: Mapped[str] = mapped_column(String(250), nullable=False)
-    number_of_supplements: Mapped[int] = mapped_column(Integer, nullable=False)
-    age_of_policy_holder: Mapped[int] = mapped_column(Integer, nullable=False)
+    number_of_supplements: Mapped[str] = mapped_column(String(250), nullable=False)
+    age_of_policy_holder: Mapped[str] = mapped_column(String(250), nullable=False)
     # Add relation:
     claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="policy")
 

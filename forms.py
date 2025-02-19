@@ -19,13 +19,19 @@ class PolicyInfoForm(FlaskForm):
                                 choices=[("", "---"), ('Liability', 'liability'), ('Collision', 'collision'),
                                          ('All Perils', 'all perils')],
                                 validators=[DataRequired()])
-    agent_type = SelectField('Select type od agent:',
+    agent_type = SelectField('Select type of agent:',
                             choices=[("", "---"), ('External', 'external'), ('Internal', 'internal')],
                             validators=[DataRequired()])
-    number_of_supplements = IntegerField('Enter the number of supplements:',
-                                         validators=[DataRequired(),NumberRange(min=0)])
-    age_of_policy_holder = IntegerField('Enter the name of policy holder:',
-                                             validators=[DataRequired(),NumberRange(min=0)])
+    number_of_supplements = SelectField('Select the number of supplements:',
+                            choices=[("", "---"), ('none', 'none'), ('1 to 2', '1 to 2'),
+                                     ('3 to 5', '3 to 5'), ('more than 5', 'more than 5')],
+                            validators=[DataRequired()])
+
+    age_of_policy_holder = SelectField('Enter the age of policy holder:',
+                            choices=[("", "---"), ('18 to 20', '18 to 20'), ('21 to 25', '21 to 25'),
+                                     ('26 to 30', '26 to 30'), ('31 to 35', '31 to 35'), ('36 to 40', '36 to 40'),
+                                     ('41 to 50', '41 to 50'), ('51 to 65', '51 to 65'), ('over 65', 'over 65')],
+                            validators=[DataRequired()])
     submit = SubmitField('Next >>')
 
 
@@ -43,11 +49,14 @@ class ClaimInfoForm(FlaskForm):
     police_report_field = SelectField('Is there a police report? :',
                                       choices=[("", "---"), ('No', 'no'), ('Yes', 'yes')],
                                       validators=[DataRequired()])
-    witness_present = SelectField('Is a witness present? :',
+    witness_present = SelectField('Is a witness present?',
                                   choices=[("", "---"), ('No', 'no'), ('Yes', 'yes')],
                                   validators=[DataRequired()])
-    address_change_claim = IntegerField('Enter the number of adress change claim:',
-                                         validators=[DataRequired(),NumberRange(min=0)])
+    address_change_claim = SelectField('Enter the number of adress change claim:',
+                                      choices=[("", "---"), ('no change', 'no change'),
+                                               ('under 6 months', 'under 6 months'), ('1 year', '1 year'),
+                                               ('2 to 3 years', '2 to 3 years'), ('4 to 8 years', '4 to 8 years')],
+                                      validators=[DataRequired()])
     rep_number = IntegerField('Select the individual number of insurance representative handling the claim (1-16):',
                                  validators=[DataRequired(), NumberRange(min=1, max=16)])
     submit = SubmitField('Request')
@@ -62,16 +71,20 @@ class DriverInfoForm(FlaskForm):
                                  choices=[("", "---"), ('Single', 'single'), ('Married', 'married'), ('Widow', 'widow'),
                                           ('Divorced', 'divorced')],
                                  validators=[DataRequired(message="Please select marital status.")])
-    age = IntegerField('Age',
-                       validators=[DataRequired(message="Select marital status:"),
-                                   NumberRange(min=0, max=125, message="Age must be between 1 and 99")])
+    age = IntegerField('Age:',
+                       validators=[DataRequired(message="Enter the age of driver:"),
+                                   NumberRange(min=0, max=80, message="Age must be between 1 and 80")])
     driver_rating = SelectField('Select a rating of driver',
                              choices=[("", "---"), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')],
                              validators=[DataRequired()])
-    past_number_of_claim = IntegerField('Enter the number of past claims:',
-                                         validators=[DataRequired(),NumberRange(min=0)])
-    number_of_cars = IntegerField('Enter the number of cars:',
-                                  validators=[DataRequired(),NumberRange(min=0)])
+    past_number_of_claim = SelectField('Select the number of past claims:',
+                                       choices=[("", "---"), ('none', 'none'), ('1', '1'),
+                                                ('2 to 4', '2 to 4'), ('more than 4', 'more than 4')],
+                                       validators=[DataRequired()])
+    number_of_cars = SelectField('Select the number of vehicles',
+                             choices=[("", "---"), ('1 vehicle', '1 vehicle'), ('2 vehicles', '2 vehicles'),
+                                      ('5 to 8', '5 to 8 vehicles'), ('more than 8', 'more than 8 vehicles')],
+                             validators=[DataRequired()])
     submit = SubmitField('Next >>', render_kw={"class": "btn-next"})
 
 
@@ -84,8 +97,12 @@ class VehicleInfoForm(FlaskForm):
                                 ('Saturn', 'Saturn'), ('Porsche', 'Porsche'), ('BMW', 'BMW'), ('Mercedes', 'Mercedes'),
                                 ('Ferrari', 'Ferrari'), ('Lexus', 'Lexus')],
                        validators=[DataRequired()])
-    year_of_production = IntegerField('Enter year od production:',
-                                 validators=[DataRequired(),NumberRange(min=0)])
+    age = SelectField('Select right age range:',
+                       choices=[("", "---"), ('new', 'new'),
+                                ('2 years', '2 years'), ('3 years', '3 years'), ('4 years', '4 years'),
+                                ('5 years', '5 years'), ('6 years', '6 years'), ('7 years', '7 years'),
+                                ('more than 7', 'more than 7')],
+                       validators=[DataRequired()])
     vehicle_category = SelectField('Select type of fault',
                                    choices=[("", "---"), ('Sport', 'sport'),
                                             ('Utility', 'utility'), ('Sedan', 'sedan')],

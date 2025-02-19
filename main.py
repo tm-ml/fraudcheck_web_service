@@ -68,7 +68,7 @@ def add_vehicle():
         new_vehicle = VehicleDataTable(
             make=form.make.data,
             vehicle_category=form.vehicle_category.data,
-            year_of_production=form.year_of_production.data,
+            age=form.age.data,
             vehicle_price=form.vehicle_price.data
         )
         db.session.add(new_vehicle)
@@ -127,7 +127,7 @@ def add_claim():
         db.session.commit()
         print("New claim reported successfully!")
 
-        #select driver, vehicle and policy rocords:
+        #select driver, vehicle and policy records:
         new_driver = DriverDataTable.query.get(driver_id)
         new_vehicle = VehicleDataTable.query.get(vehicle_id)
         new_policy = PolicyDataTable.query.get(policy_id)
@@ -146,7 +146,7 @@ def add_claim():
             MaritalStatus = new_driver.marital_status,
             Age = new_driver.age,
             Fault = new_claim.fault,
-            PolicyType = 'tmp',
+            PolicyType = new_vehicle.vehicle_category + " - " + new_policy.base_policy,
             VehicleCategory = new_vehicle.vehicle_category,
             VehiclePrice = new_vehicle.vehicle_price,
             PolicyNumber = new_policy.policy_number,
@@ -158,7 +158,7 @@ def add_claim():
             Days_Policy_Claim = utils.date_difference(date_1=new_claim.claim_report_datetime.date(),
                                                       date_2=new_policy.policy_start_date),
             PastNumberOfClaims = new_driver.past_number_of_claim,
-            AgeOfVehicle = datetime.now().year - new_vehicle.year_of_production,
+            AgeOfVehicle = new_vehicle.age,
             AgeOfPolicyHolder = new_policy.age_of_policy_holder,
             PoliceReportFiled = new_claim.police_report,
             WitnessPresent = new_claim.witness_present,
