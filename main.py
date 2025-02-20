@@ -1,7 +1,8 @@
 import os
 import utils
+import json
 
-from datetime import datetime, date
+from datetime import datetime
 from dotenv import load_dotenv
 
 from flask import session, render_template, redirect, url_for, Flask, jsonify
@@ -179,6 +180,9 @@ def add_claim():
         request_entry = RequestTable.query.get(new_request.id)
         request_json = jsonify(utils.to_dict(request_entry))
         print(f"JSON representation is: {request_json}")
+
+        request_json_printable = json.dumps(utils.to_dict(request_entry), indent=4, ensure_ascii=False)
+        print(f"The JSON is: {request_json_printable}")
 
     return render_template("predictions.html", form=form, title=title)
 

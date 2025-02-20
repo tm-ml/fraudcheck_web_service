@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Float, Integer, String, Date, DateTime
 
 
-
 #Create database:
 class Base(DeclarativeBase):
     pass
