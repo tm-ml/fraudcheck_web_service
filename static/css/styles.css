@@ -489,6 +489,17 @@ progress {
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
+  display: block;
+  width: 100%;
+  text-align: justify;
+}
+
+.lead-01 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  text-align: justify;
 }
 
 .display-1 {

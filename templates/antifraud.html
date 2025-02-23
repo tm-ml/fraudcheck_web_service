@@ -1,0 +1,60 @@
+{% from 'bootstrap5/form.html' import render_form %}
+{% include "header.html" %}
+
+<!-- Image element - set the background image for the header in the line below-->
+<div class="py-5 bg-image-full"
+     style="background-image: url('https://images.unsplash.com/photo-1713623311317-d3c43a4be4cf?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); height: 300px;">
+    <!-- Spacer to ensure the image appears correctly -->
+    <div class="d-flex justify-content-center align-items-center"
+         style="height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+        <h1 class="text-white">Fill the forms to check if your case is a fraud!</h1>
+    </div>
+</div>
+<!-- Content section-->
+<section class="py-5">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h2>Fraud detector:</h2>
+                <p class="lead">Insurance fraud in motor claims is a significant issue affecting both insurance
+                    companies and policyholders. Fraudulent claims lead to increased premiums, financial losses,
+                    and a burden on legal and investigative resources. These fraudulent activities can take various
+                    forms, such as staged accidents, exaggerated damages, or false injury claims. Identifying potential
+                    fraud cases early is crucial to minimizing financial risks and improving the efficiency of claim
+                    processing.</p>
+                <p class="lead-01">To address this challenge, I have developed a machine learning-powered web portal
+                    designed to
+                    predict the probability of fraud in motor insurance claims. The platform enables users to enter key
+                    details regarding:</p>
+                <ul class="lead-01">
+                    <li>Vehicle Details (e.g., make, model, category, price)</li>
+                    <li>Policy Information (e.g., policy number, start date, deductible, policy type)</li>
+                    <li>Accident & Claim Details (e.g., collision date, accident location, police report status,
+                        witness presence)
+                    </li>
+                </ul>
+                <p class="lead">Once the required data is submitted through the form, the system processes the
+                    information and sends
+                    a request to an external API for fraud probability analysis. The external API utilizes pre-trained
+                    machine learning models that analyze patterns in historical claims data to determine the likelihood
+                    of fraudulent activity.</p>
+                <p class="lead-01">By leveraging machine learning and external data processing, this web portal provides
+                    a data-driven,
+                    efficient, and scalable approach to fraud detection. It enhances decision-making for insurers,
+                    helping them identify suspicious claims faster and more accurately.</p>
+                <div class="d-flex gap-2 justify-content-end py-5">
+                    <button class="btn btn-dark d-inline-flex align-items-center" type="button"
+                            onclick="window.location.href='{{ url_for('add_driver') }}'">
+                        Predict >
+                        <svg class="bi ms-1" width="20" height="20">
+                            <use xlink:href="#arrow-right-short"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% include "footer.html" %}

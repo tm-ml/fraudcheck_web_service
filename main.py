@@ -32,16 +32,21 @@ if not os.path.exists(db_path):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", show_header=True)
 
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template("about.html", show_header=True)
 
 
-@app.route('/predictions', methods=["GET", "POST"])
-def predictions():
+@app.route('/antifraud')
+def antifraud():
+    return render_template("antifraud.html", show_header=True)
+
+
+@app.route('/add_driver', methods=["GET", "POST"])
+def add_driver():
     title = "Add data about driver:"
     form = DriverInfoForm()
     if form.validate_on_submit():
@@ -58,7 +63,7 @@ def predictions():
         session["driver_id"] = new_driver.id
         print("Driver data added!")
         return redirect(url_for("add_vehicle"))
-    return render_template("predictions.html", form=form, title=title)
+    return render_template("predictions.html", form=form, title=title, show_header=False)
 
 
 @app.route('/add_vehicle', methods=["GET", "POST"])
@@ -77,7 +82,7 @@ def add_vehicle():
         session["vehicle_id"] = new_vehicle.id
         print("Vehicle data added!")
         return redirect(url_for("add_policy"))
-    return render_template("predictions.html", form=form, title=title)
+    return render_template("predictions.html", form=form, title=title, show_header=False)
 
 
 @app.route('/add_policy', methods=["GET", "POST"])
@@ -99,7 +104,7 @@ def add_policy():
         session["policy_id"] = new_policy.id
         print("Policy data added!")
         return redirect(url_for("add_claim"))
-    return render_template("predictions.html", form=form, title=title)
+    return render_template("predictions.html", form=form, title=title, show_header=False)
 
 
 @app.route('/add_claim', methods=["GET", "POST"])
@@ -195,12 +200,6 @@ def database():
 @app.route('/contact')
 def contact():
     return render_template("contact.html")
-
-# @app.route('/index')
-# def database():
-#     return render_template("index.html")
-
-
 
 
 if __name__ == "__main__":

@@ -25,13 +25,15 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if show_header %}
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ url_for('about') }}">About</a></li>
-                <li class="nav-item"><a class="nav-link active" href="{{ url_for('predictions') }}">Predictions</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('antifraud') }}">Anti-Fraud</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ url_for('database') }}">Database</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ url_for('contact') }}">Contact</a></li>
             </ul>
+            {% endif %}
         </div>
     </div>
 </nav>

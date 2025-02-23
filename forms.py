@@ -32,7 +32,7 @@ class PolicyInfoForm(FlaskForm):
                                      ('26 to 30', '26 to 30'), ('31 to 35', '31 to 35'), ('36 to 40', '36 to 40'),
                                      ('41 to 50', '41 to 50'), ('51 to 65', '51 to 65'), ('over 65', 'over 65')],
                             validators=[DataRequired()])
-    submit = SubmitField('Next >>')
+    submit = SubmitField('Next >>', render_kw={"class": "btn-next"})
 
 
 # Form to collect data about claim:
@@ -59,7 +59,7 @@ class ClaimInfoForm(FlaskForm):
                                       validators=[DataRequired()])
     rep_number = IntegerField('Select the individual number of insurance representative handling the claim (1-16):',
                                  validators=[DataRequired(), NumberRange(min=1, max=16)])
-    submit = SubmitField('Request')
+    submit = SubmitField('Request', render_kw={"class": "btn-next"})
 
 
 # Form to collect data about driver:
@@ -113,4 +113,4 @@ class VehicleInfoForm(FlaskForm):
                                 ('40000 to 59000', '40000 to 59000'), ('60000 to 69000', '60000 to 69000'),
                                 ('more than 69000', 'more than 69000')],
                        validators=[DataRequired()])
-    submit = SubmitField('Next >>')
+    submit = SubmitField('Next >>', render_kw={"class": "btn-next"})
