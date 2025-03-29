@@ -9,6 +9,7 @@ from sqlalchemy import Float, Integer, String, Date, DateTime
 class Base(DeclarativeBase):
     pass
 
+
 db = SQLAlchemy(model_class=Base)
 
 class ClaimDataTable(db.Model):
@@ -34,6 +35,7 @@ class ClaimDataTable(db.Model):
     policy: Mapped["PolicyDataTable"] = relationship("PolicyDataTable", back_populates="claims")
     request: Mapped["RequestTable"] = relationship("RequestTable", back_populates="claims")
 
+
 class DriverDataTable(db.Model):
     __tablename__ = "driver_table"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -46,6 +48,7 @@ class DriverDataTable(db.Model):
     # Add relation:
     claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="driver")
 
+
 class VehicleDataTable(db.Model):
     __tablename__ = "vehicle_table"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -54,7 +57,8 @@ class VehicleDataTable(db.Model):
     vehicle_category: Mapped[str] = mapped_column(String(250), nullable=False)
     vehicle_price: Mapped[str] = mapped_column(String(250), nullable=False)
     # Add relation:
-    claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="vehicle")
+    claims: Mapped["ClaimDataTable"] = relationship("ClaimDataTable", back_populates="vehicle")
+
 
 class PolicyDataTable(db.Model):
     __tablename__ = "policy_table"
@@ -67,7 +71,8 @@ class PolicyDataTable(db.Model):
     number_of_supplements: Mapped[str] = mapped_column(String(250), nullable=False)
     age_of_policy_holder: Mapped[str] = mapped_column(String(250), nullable=False)
     # Add relation:
-    claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="policy")
+    claims: Mapped["ClaimDataTable"] = relationship("ClaimDataTable", back_populates="policy")
+
 
 class RequestTable(db.Model):
     __tablename__ = "request_table"
@@ -104,10 +109,20 @@ class RequestTable(db.Model):
     NumberOfCars: Mapped[str] = mapped_column(String(250), nullable=False)
     Year: Mapped[int] = mapped_column(Integer, nullable=False)
     BasePolicy: Mapped[str] = mapped_column(String(250), nullable=False)
-    Prediction: Mapped[int] = mapped_column(Integer, nullable=False)
-    Possibility_of_fraud: Mapped[float] = mapped_column(Float, nullable=False)
     # Add relation:
-    claims: Mapped[list["ClaimDataTable"]] = relationship("ClaimDataTable", back_populates="request")
+    claims: Mapped["ClaimDataTable"] = relationship("ClaimDataTable", back_populates="request")
+    prediction: Mapped["PredictionTable"] = relationship("PredictionTable", back_populates="request")
+
+
+class PredictionTable(db.Model):
+    __tablename__ = "prediction_table"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    # Add foreign keys:
+    request_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("request_table.id"))
+    prediction: Mapped[int] = mapped_column(Integer, nullable=False)
+    # Add relation
+    request: Mapped["RequestTable"] = relationship("RequestTable", back_populates="prediction")
+
 
 
 
