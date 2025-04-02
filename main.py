@@ -194,7 +194,8 @@ def add_claim():
         # make new record in PredictionTable:
         new_prediction = PredictionTable(
             request_id = int(new_request.id),
-            prediction = response["Result"]
+            prediction = response["Result"],
+            fraud_probability = "doesn't work right now" #TODO: remake API to response fraud probability
         )
         db.session.add(new_prediction)
         db.session.commit()

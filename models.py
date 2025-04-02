@@ -120,6 +120,7 @@ class PredictionTable(db.Model):
     # Add foreign keys:
     request_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("request_table.id"))
     prediction: Mapped[int] = mapped_column(Integer, nullable=False)
+    fraud_probability: Mapped[int] = mapped_column(String, nullable=False)
     # Add relation
     request: Mapped["RequestTable"] = relationship("RequestTable", back_populates="prediction")
 
