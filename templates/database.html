@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-<h1  style="margin-top: 25px; margin-left: 25px;">Recorded requests:</h1>
+<h1 style="margin-top: 25px; margin-left: 25px;">Recorded requests:</h1>
 
 {% if requests %}
 <div style="overflow-x: auto; max-width: 100%; margin-top: 25px;">
@@ -35,37 +35,19 @@
             {% endfor %}
         </tr>
         {% for request in requests %}
-            <tr>
-                {% for header in headers %}
-                    <td>{{ request[header] }}</td>
-                {% endfor %}
-            </tr>
+        <tr>
+            {% for header in headers %}
+            <td>{{ request[header] }}</td>
+            {% endfor %}
+        </tr>
         {% endfor %}
     </table>
 </div>
 {% else %}
-<p>Brak danych do wyświetlenia.</p>
+<p>No data to display.</p>
 {% endif %}
-
 </body>
 </html>
-
-
-<!--<section class="py-5">-->
-<!--    <div class="container my-5">-->
-<!--        <div class="row justify-content-center">-->
-<!--            <div class="col-lg-6">-->
-<!--                <p> aqq this is database template</p>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-<!--&lt;!&ndash; Image element - set the background image for the header in the line below&ndash;&gt;-->
-<!--<div class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/4ulffa6qoKA/1200x800')">-->
-<!--    &lt;!&ndash; Put anything you want here! The spacer below with inline CSS is just for demo purposes!&ndash;&gt;-->
-<!--    <div style="height: 20rem"></div>-->
-<!--</div>-->
 
 
 {% include "footer.html" %}
