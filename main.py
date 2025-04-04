@@ -9,7 +9,7 @@ from flask import session, render_template, redirect, url_for, Flask, jsonify
 from flask_bootstrap import Bootstrap5
 
 from forms import  ClaimInfoForm, DriverInfoForm, PolicyInfoForm, VehicleInfoForm
-from models import db, ClaimDataTable, DriverDataTable, PolicyDataTable, VehicleDataTable, RequestTable, PredictionTable
+from models import db, ClaimDataTable, DriverDataTable, PolicyDataTable, VehicleDataTable, RequestTable
 from new_request import make_request
 
 #load dependencies:
@@ -175,8 +175,6 @@ def add_claim():
             NumberOfCars = new_driver.number_of_cars,
             Year = datetime.now().year,
             BasePolicy = new_policy.base_policy,
-            # Prediction = 1,
-            # Possibility_of_fraud = 77
         )
         db.session.add(new_request)
         db.session.commit()
@@ -187,20 +185,17 @@ def add_claim():
         request_json_printable = utils.to_dict(request_entry)
         print(f"The JSON is: {request_json_printable}")
 
-        # make a request:
+        # make a request and get a response:
         response = make_request(json=request_json_printable)
         print(response)
 
-        # make new record in PredictionTable:
-        new_prediction = PredictionTable(
-            request_id = int(new_request.id),
-            prediction = response["Result"],
-            fraud_probability = "doesn't work right now" #TODO: remake API to response fraud probability
-        )
-        db.session.add(new_prediction)
+        # add prediction and fraud probability data in RequestTable:
+        request = RequestTable.query.get(new_request.id)
+        request.prediction = response["Result"]
+        # request.fraud_probability = 0 # TODO: if API provides  information about fraud probability
         db.session.commit()
         print("New request is added successfully")
-
+        return redirect(url_for("database"))
     return render_template("predictions.html", form=form, title=title)
 
 

@@ -109,20 +109,22 @@ class RequestTable(db.Model):
     NumberOfCars: Mapped[str] = mapped_column(String(250), nullable=False)
     Year: Mapped[int] = mapped_column(Integer, nullable=False)
     BasePolicy: Mapped[str] = mapped_column(String(250), nullable=False)
+    prediction: Mapped[int] = mapped_column(Integer, nullable=True)
+    # fraud_probability: Mapped[int] = mapped_column(String, nullable=True) TODO: if API provides information about fraud probability
     # Add relation:
     claims: Mapped["ClaimDataTable"] = relationship("ClaimDataTable", back_populates="request")
-    prediction: Mapped["PredictionTable"] = relationship("PredictionTable", back_populates="request")
+    # prediction: Mapped["PredictionTable"] = relationship("PredictionTable", back_populates="request")
 
 
-class PredictionTable(db.Model):
-    __tablename__ = "prediction_table"
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    # Add foreign keys:
-    request_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("request_table.id"))
-    prediction: Mapped[int] = mapped_column(Integer, nullable=False)
-    fraud_probability: Mapped[int] = mapped_column(String, nullable=False)
-    # Add relation
-    request: Mapped["RequestTable"] = relationship("RequestTable", back_populates="prediction")
+# class PredictionTable(db.Model):
+#     __tablename__ = "prediction_table"
+#     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+#     # Add foreign keys:
+#     request_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("request_table.id"))
+#     prediction: Mapped[int] = mapped_column(Integer, nullable=False)
+#     fraud_probability: Mapped[int] = mapped_column(String, nullable=False)
+#     # Add relation
+#     request: Mapped["RequestTable"] = relationship("RequestTable", back_populates="prediction")
 
 
 
