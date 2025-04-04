@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+{% include "header.html" %}
+
+
+<!-- Content section-->
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dane z bazy</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 200%;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: right;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+        th {
+            background-color: #f2f2f2;
+            max-width: 500px;
+        }
+    </style>
 </head>
 <body>
+<h1>Recorded Requests</h1>
+
+{% if requests %}
+<div style="overflow-x: auto; max-width: 100%;">
+    <table>
+        <tr>
+            {% for header in headers %}
+            <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        {% for request in requests %}
+            <tr>
+                {% for header in headers %}
+                    <td>{{ request[header] }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<p>Brak danych do wyświetlenia.</p>
+{% endif %}
 
 </body>
 </html>
+
+
+<!--<section class="py-5">-->
+<!--    <div class="container my-5">-->
+<!--        <div class="row justify-content-center">-->
+<!--            <div class="col-lg-6">-->
+<!--                <p> aqq this is database template</p>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; Image element - set the background image for the header in the line below&ndash;&gt;-->
+<!--<div class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/4ulffa6qoKA/1200x800')">-->
+<!--    &lt;!&ndash; Put anything you want here! The spacer below with inline CSS is just for demo purposes!&ndash;&gt;-->
+<!--    <div style="height: 20rem"></div>-->
+<!--</div>-->
+
+
+{% include "footer.html" %}

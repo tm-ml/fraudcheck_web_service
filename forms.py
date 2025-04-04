@@ -89,7 +89,7 @@ class DriverInfoForm(FlaskForm):
 
 
 class VehicleInfoForm(FlaskForm):
-    make = SelectField('Select type of fault',
+    make = SelectField('Select type car brand',
                        choices=[("", "---"), ('Honda', 'Honda'), ('Toyota', 'Toyota'), ('Ford', 'Ford'),
                                 ('Mazda', 'Mazda'), ('Chevrolet', 'Chevrolet'), ('Pontiac', 'Pontiac'),
                                 ('Acura', 'Acura'), ('Dodge', 'Dodge'), ('Mercury', 'Mercury'),
@@ -103,7 +103,7 @@ class VehicleInfoForm(FlaskForm):
                                 ('5 years', '5 years'), ('6 years', '6 years'), ('7 years', '7 years'),
                                 ('more than 7', 'more than 7')],
                        validators=[DataRequired()])
-    vehicle_category = SelectField('Select type of fault',
+    vehicle_category = SelectField('Select type of car',
                                    choices=[("", "---"), ('Sport', 'sport'),
                                             ('Utility', 'utility'), ('Sedan', 'sedan')],
                                    validators=[DataRequired()])

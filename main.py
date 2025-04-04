@@ -206,12 +206,15 @@ def add_claim():
 
 @app.route('/database')
 def database():
-    return render_template("database.html")
+    requests = RequestTable.query.all()
+    headers = [column.name for column in RequestTable.__table__.columns]
+    request_data = [{header: getattr(req, header) for header in headers} for req in requests]
+    return render_template("database.html", requests=requests, headers=headers, show_header=True)
 
 
 @app.route('/contact')
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", show_header=True)
 
 
 if __name__ == "__main__":
