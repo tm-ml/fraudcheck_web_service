@@ -1,0 +1,27 @@
+{% include "header.html" %}
+
+
+<!-- Content section-->
+<section class="py-5">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                {% if prediction == "1"%}
+                    <h1 style="margin-top: 75px; color: red;">FRAUD DETECTED!!!</h1>
+                    <p class="lead" style="margin-top: 30px;"><strong>The claim was detected as fraudulent! Be aware and let's contact anti-fraud investigation team!</strong></strong></p>
+                {% else %}
+                    <h2 style="margin-top: 75px;">The claim looks clear!</h2>
+                    <p class="lead" style="margin-top: 30px;"><strong>The claim was not detected as fraudulent, but exercise caution!</strong></p>
+                {% endif %}
+                <p class="lead" style="margin-top: 30px;">To check another predictions check our <a href="/database">database</a>!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Image element - set the background image for the header in the line below-->
+<div class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/4ulffa6qoKA/1200x800')">
+    <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
+    <div style="height: 20rem"></div>
+</div>
+
+{% include "footer.html" %}

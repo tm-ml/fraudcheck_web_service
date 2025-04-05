@@ -1,11 +1,13 @@
 import os
+from http.client import responses
+
 import utils
 import json
 
 from datetime import datetime
 from dotenv import load_dotenv
 
-from flask import session, render_template, redirect, url_for, Flask, jsonify
+from flask import session, render_template, redirect, url_for, request, Flask
 from flask_bootstrap import Bootstrap5
 
 from forms import  ClaimInfoForm, DriverInfoForm, PolicyInfoForm, VehicleInfoForm
@@ -187,23 +189,33 @@ def add_claim():
 
         # make a request and get a response:
         response = make_request(json=request_json_printable)
+        session["response"] = response
         print(response)
 
         # add prediction and fraud probability data in RequestTable:
         request = RequestTable.query.get(new_request.id)
-        request.prediction = response["Result"]
-        # request.fraud_probability = 0 # TODO: if API provides  information about fraud probability
+        prediction = response["Result"]
+        request.prediction = prediction
+        # request.fraud_probability = 0 # TODO: add fraud_probability if API provides information about fraud probability
         db.session.commit()
         print("New request is added successfully")
-        return redirect(url_for("database"))
+
+        return redirect(url_for("result", prediction=prediction))
     return render_template("predictions.html", form=form, title=title)
+
+@app.route('/result')
+def result():
+    prediction = request.args.get("prediction")
+    print(f"the prediction is: {prediction}")
+    print(type(prediction))
+    return render_template("result.html", prediction=prediction, show_header=True)
 
 
 @app.route('/database')
 def database():
     requests = RequestTable.query.all()
     headers = [column.name for column in RequestTable.__table__.columns]
-    request_data = [{header: getattr(req, header) for header in headers} for req in requests]
+    # request_data = [{header: getattr(req, header) for header in headers} for req in requests]
     return render_template("database.html", requests=requests, headers=headers, show_header=True)
 
 
