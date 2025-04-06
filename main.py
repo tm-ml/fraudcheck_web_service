@@ -1,8 +1,6 @@
 import os
-from http.client import responses
 
 import utils
-import json
 
 from datetime import datetime
 from dotenv import load_dotenv
@@ -14,6 +12,7 @@ from forms import  ClaimInfoForm, DriverInfoForm, PolicyInfoForm, VehicleInfoFor
 from models import db, ClaimDataTable, DriverDataTable, PolicyDataTable, VehicleDataTable, RequestTable
 from new_request import make_request
 
+
 #load dependencies:
 load_dotenv()
 
@@ -23,8 +22,10 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI")
 Bootstrap5(app)
 
+
 #Initialise database:
 db.init_app(app)
+
 
 #Create database if not exist:
 db_path = app.config['SQLALCHEMY_DATABASE_URI'].replace("sqlite:///", "")

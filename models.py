@@ -1,7 +1,7 @@
 from datetime import datetime, date
 
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import relationship, mapped_column, DeclarativeBase, Mapped
 from sqlalchemy import Float, Integer, String, Date, DateTime
 
 
