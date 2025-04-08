@@ -14,13 +14,15 @@
                 <p class="lead" style="text-align: justify; margin-top: 30px; margin-left: 30px;">
                     The project begins with an <strong>Exploratory Data Analysis (EDA)</strong> of insurance data,
                     sourced
-                    from Kaggle (https://www.kaggle.com/code/idolourie/car-insurance-eda/input). Using <strong>data
-                    engineering</strong> techniques, I extracted key features from the dataset and preprocessed the data
-                    for
-                    model training. A <strong>classification model</strong> based on <strong>XGBoost</strong> was then
+                    from <a href="https://www.kaggle.com/datasets/shivamb/vehicle-claim-fraud-detection">Kaggle</a>. Using
+                    <strong>data
+                        engineering</strong> techniques, I extracted key features from the dataset and preprocessed the
+                    data
+                    for model training. A <strong>classification model</strong> based on <strong>XGBoost</strong> was
+                    then
                     trained to predict the likelihood of fraud (fraud vs. not fraud). A <strong>prediction
-                    pipeline</strong>
-                    was built to handle raw data and generate predictions.<br>
+                    pipeline</strong> was built to handle raw data and generate predictions. To check my notebooks click
+                    <a href="https://github.com/tm-ml/MotorClaimFraudDetection_Notebooks">here</a><br>
                     Technologies used: <strong>pandas</strong>, <strong>numpy</strong>, <strong>matplotlib</strong>,
                     <strong>seaborn</strong>, <strong>plotly</strong>, <strong>sklearn</strong>,
                     <strong>XGBoost</strong>.
@@ -29,21 +31,23 @@
                 <p class="lead" style="text-align: justify; margin-top: 30px; margin-left: 30px;">
                     The trained XGBoost model was then <strong>containerized</strong> into a production-ready API using
                     <strong>FastAPI</strong>. The model was deployed on <strong>Render.com</strong>, enabling it to
-                    serve
-                    real-time predictions.<br>
+                    serve real-time predictions. The project is available on GitHub: <a
+                        href="https://github.com/tm-ml/API-MotorClaimFraudDetection">API-MotorClaimFraudDetection</a><br>
                     Technologies used: <strong>FastAPI</strong>, <strong>Docker</strong>, <strong>Git</strong>, <strong>Pydantic</strong>.
                 </p>
                 <h4>3. Web Application - "The Tom Collection":</h4>
                 <p class="lead" style="text-align: justify; margin-top: 30px; margin-left: 30px;">
                     A <strong>web application</strong> called "The Tom Collection" was developed, featuring a form and a
                     backend database to collect user data. The application allows users to send requests to the API and
-                    obtain predictions regarding insurance fraud qualification (fraud vs. not fraud).<br>
+                    obtain predictions regarding insurance fraud qualification (fraud vs. not fraud). For implementation
+                    details, feel free to explore the repository: <a
+                        href="https://github.com/tm-ml/fraudcheck_web_service">fraudcheck_web_service</a><br>
                     Technologies used: <strong>Flask</strong>, <strong>SQLAlchemy</strong>, <strong>PostgreSQL</strong>,
                     <strong>requests</strong>.<br>
                     Frontend technologies: <strong>CSS</strong>, <strong>HTML</strong>.
                 </p>
                 <p class="lead" style="text-align: justify; margin-top: 30px;">All components of the project are
-                    published and available on <strong>GitHub</strong> for
+                    published and available on <strong><a href="https://github.com/tm-ml">GitHub</a></strong> for
                     reference and further exploration.</p>
             </div>
         </div>
@@ -51,3 +55,4 @@
 </section>
 
 {% include "footer.html" %}
+<a href="/database">database</a>
