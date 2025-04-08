@@ -3,6 +3,7 @@ from datetime import date
 def to_dict(self):
     data = {column.name: getattr(self, column.name) for column in self.__table__.columns}
     data.pop("id", None)
+    data.pop("prediction", None)
     return data
 
 def date_difference(date_1: date, date_2: date) -> int:

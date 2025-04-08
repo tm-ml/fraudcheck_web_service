@@ -5,7 +5,7 @@ import utils
 from datetime import datetime
 from dotenv import load_dotenv
 
-from flask import session, render_template, redirect, url_for, request, Flask
+from flask import jsonify, session, render_template, redirect, url_for, request, Flask
 from flask_bootstrap import Bootstrap5
 
 from forms import  ClaimInfoForm, DriverInfoForm, PolicyInfoForm, VehicleInfoForm
