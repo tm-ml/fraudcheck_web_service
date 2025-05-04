@@ -1,6 +1,6 @@
 # Insurance Claim Fraud Detection App
 
-A Flask-based web application that allows users to submit detailed insurance claim information and receive real-time predictions about the likelihood of fraud. The system collects user input through a multi-step form and sends it to a prediction API to assess fraud risk.
+A Flask-based web application allows users to submit detailed insurance claim information and receive predictions about the likelihood of fraud. The system collects user input through a multi-step form and sends it to external API to get preiction about potential classification (fraud, not fraud).
 
 ---
 
@@ -39,19 +39,14 @@ User submits form data in multiple steps:
 ![image](https://github.com/user-attachments/assets/2f49cb53-61e4-4e57-af36-d0a1ea265d38)
 ![image](https://github.com/user-attachments/assets/e2e078e0-bfbf-4c52-8512-d707a05ad0dc)
 ![image](https://github.com/user-attachments/assets/1c6b1abc-0d1f-4d8c-878d-1530286c3268)
+![image](https://github.com/user-attachments/assets/06c12e5f-074a-48fd-b055-ba4908da3304)
+![image](https://github.com/user-attachments/assets/878509ee-9f0b-4a53-a5ca-8bc3c365c275)
 
 
-
-
-
-
-
-
-Data is stored in a relational SQLite database.
-Once all forms are submitted, the app aggregates the data.
-A JSON payload is sent to a prediction API.
-The API responds with a fraud risk prediction.
-The result is shown to the user and saved in the database.
+During filling the forms, data is collected into relatinal database.
+A JSON payload is sent to external API to get a prediction.
+The prediction is showed to user.
+It is possible to check last prediction in database section.
 
 
 
